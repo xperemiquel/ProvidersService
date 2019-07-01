@@ -1,8 +1,16 @@
 from rest_framework import routers
-from .views import ProviderViewSet, ServiceAreaViewSet
+from .views import ProviderViewSet, ServiceAreaViewSet, CheckServiceAreaApiView
 
-router = routers.DefaultRouter()
+class OptionalTrailingSlashRouter(routers.DefaultRouter):
+
+    def __init__(self, *args, **kwargs): 
+        super(routers.DefaultRouter, self).__init__(*args, **kwargs) 
+        self.trailing_slash = '/?'
+
+router = OptionalTrailingSlashRouter()
 router.register('providers', ProviderViewSet, 'providers') # url /providers
+router.register('servicearea', ServiceAreaViewSet, 'servicearea') # url /service_area
+router.register('check', CheckServiceAreaApiView, 'check') 
 
 
 urlpatterns = router.urls

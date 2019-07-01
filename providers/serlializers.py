@@ -13,3 +13,7 @@ class ServiceAreaSerializer(serializers.ModelSerializer):
         model = ServiceArea
         fields = '__all__'
 
+class CheckServiceAreaSerializer(serializers.Serializer):
+    lat = serializers.FloatField()
+    lng = serializers.FloatField()
+
